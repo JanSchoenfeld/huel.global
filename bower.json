@@ -1,0 +1,20 @@
+{
+  "name": "my-project",
+  "description": "",
+  "main": "src/app.js",
+  "authors": [
+    "JanSchoenfeld <jan.schoenfeld@fh-muenster.de>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.2.1"
+  }
+}
