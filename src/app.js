@@ -7,7 +7,7 @@ const port = 3000;
 
 const app = express();
 
-console.log(__dirname + "../../public/js/main.js");
+console.log(__dirname + "/public/js/main.js");
 
 function configureApp(app) {
 
