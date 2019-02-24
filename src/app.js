@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const bcrypt = require('bcrypt');
 const users = require('./routes/users');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
@@ -28,6 +28,7 @@ function configureApp(app) {
         extended: true
     }));
     app.use(bodyParser.json());
+    app.use(cookieParser());
     app.engine('hbs', exphbs(engineConfig));
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
