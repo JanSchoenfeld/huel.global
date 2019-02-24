@@ -8,7 +8,7 @@ const router = express.Router();
 const users = JSON.parse(fs.readFileSync('./users.json'));
 
 //cookie expiration time
-const expTime = 1000 * 20 * 60 * 2;
+const expTime = 1000 * 60 * 60 * 2;
 
 router.get('/', (req, res) => {
     res.render('sign-up');

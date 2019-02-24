@@ -1,6 +1,6 @@
 const uuidv4 = require('uuid/v4');
 
-//class for creating user objects and persisting them (TODO)
+//class for creating user objects and persisting them
 class User {
     
     constructor(username, hash) {

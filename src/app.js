@@ -37,7 +37,7 @@ function configureApp(app) {
     app.use('/sign-up', signUp);
     //middleware für authenthifizierung
     app.use((req, res, next) => {
-        const token = req.cookies['jwt'] || '';
+        const token = req.cookies.jwt || '';
         if (token != '') {
             let userSession = jwt.verify(token, 'secret');
             if (userSession.exp < Date.now()) {
