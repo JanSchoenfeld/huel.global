@@ -14,29 +14,29 @@ router.get('/', (req, res) => {
     res.render('sign-in');
 });
 
-//posts form data and hashes password (should be sign-up, actually)
+//checks if form passwort is equal to hash in users.json
 router.post('/', (req, res) => {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
-        let user = new User(req.body.username, hash);
-        users.push(user);
-        fs.writeFileSync('./users.json', JSON.stringify(users, null, 2), 'utf8', (err) => {
-            if (err) {
-                console.log(err);
+
+    let user = users.find(function (element) {
+        if (element.username === req.body.username) {
+            console.log('user is ' + element.username);
+            return element;
+        }
+    });
+
+    if (user != undefined) {
+        bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
+            if (isValid) {
+                res.send('korrektes passwort, korrekter typ');
+            } else {
+                res.send('passwort nix korrekt');
             }
         })
-        res.send(JSON.stringify(users, null, 2));
-    })
-})
+    } else {
+        console.log('user existiert nicht!');
+        res.send('user existiert nicht!');
+    }
 
-//checks if form passwort is equal to hash in users.json
-// router.post('/', (req, res) => {
-//     bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
-//         if(isValid){
-//             res.send('korrektes passwort, korrekter typ');
-//         }else{
-//             res.send('passwort nix korrekt');
-//         }
-//     })
-// })
+})
 
 module.exports = router;
