@@ -7,8 +7,6 @@ const users = require('./routes/users');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
 
-console.log(__dirname)
-
 const port = 3000;
 
 const app = express();
@@ -20,7 +18,7 @@ function configureApp(app) {
         layoutsDir: path.join(__dirname, 'views', 'layouts'),
         partialsDir: path.join(__dirname, 'views', 'partials'),
         defaultLayout: 'main'
-    }
+    };
 
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(express.static(path.join(__dirname, '../bower_components')));
@@ -36,11 +34,11 @@ function configureApp(app) {
 
     app.get('/', (req, res) => {
         res.redirect('/sign-in');
-    })
+    });
 
     app.get('/bye', (req, res) => {
         res.send('ok bye 4 eva');
-    })
+    });
 
     app.use('/sign-in', signIn);
     app.use('/sign-up', signUp);
@@ -54,7 +52,7 @@ function start() {
 
     app.listen(port, () => {
         console.log(`Server listening at http://localhost:${port}`);
-    })
+    });
 }
 
 start();

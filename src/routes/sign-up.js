@@ -12,7 +12,7 @@ const expTime = 1000 * 60 * 60 * 2;
 
 router.get('/', (req, res) => {
     res.render('sign-up');
-})
+});
 
 router.post('/', (req, res) => {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -22,14 +22,14 @@ router.post('/', (req, res) => {
             if (err) {
                 console.log(err);
             }
-        })
+        });
         res.cookie('jwt', createToken(user), {
             expires: new Date(Date.now() + expTime)
         });
         console.log(JSON.stringify(res, null, 2));
         res.send(JSON.stringify(user, null, 2));
-    })
-})
+    });
+});
 
 function createToken(user) {
     const claimsSet = {

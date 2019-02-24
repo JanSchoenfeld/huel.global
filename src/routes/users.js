@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.send('Welcome on /users!');
-})
+});
 
 
 module.exports = router;

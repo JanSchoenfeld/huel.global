@@ -1,4 +1,4 @@
-const uuidv4 = require('uuid/v4')
+const uuidv4 = require('uuid/v4');
 
 //class for creating user objects and persisting them (TODO)
 class User {

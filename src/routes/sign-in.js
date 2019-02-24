@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
                 res.clearCookie('jwt');
                 res.send('passwort nix korrekt');
             }
-        })
+        });
     } else {
         res.clearCookie('jwt');
         res.send('user existiert nicht!');
