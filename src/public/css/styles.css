@@ -11,16 +11,3 @@ html {
     -moz-box-sizing: inherit;
     box-sizing: inherit;
 }
-
-body {
-    text-align: center;
-}
-
-p {
-    margin-bottom: 0px;
-}
-
-.container-fluid {
-    display: flex;
-    text-align: center;
-}
