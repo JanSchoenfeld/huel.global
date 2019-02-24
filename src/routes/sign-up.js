@@ -8,7 +8,7 @@ const router = express.Router();
 const users = JSON.parse(fs.readFileSync('./users.json'));
 
 //cookie expiration time
-const expTime = 1000 * 60 * 60 * 2;
+const expTime = 1000 * 20 * 60 * 2;
 
 router.get('/', (req, res) => {
     res.render('sign-up');
@@ -23,10 +23,7 @@ router.post('/', (req, res) => {
                 console.log(err);
             }
         });
-        res.cookie('jwt', createToken(user), {
-            expires: new Date(Date.now() + expTime)
-        });
-        console.log(JSON.stringify(res, null, 2));
+        res.cookie('jwt', createToken(user));
         res.send(JSON.stringify(user, null, 2));
     });
 });
@@ -36,6 +33,7 @@ function createToken(user) {
         id: user.id,
         name: user.username,
         iat: Date.now(),
+        exp: Date.now() + expTime
     };
     return jwt.sign(claimsSet, 'secret', {
         algorithm: 'HS256'

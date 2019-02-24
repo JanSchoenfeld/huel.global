@@ -1,13 +1,26 @@
-[{
-        "id": "2bab4456-f3b6-44c1-a81a-bae9deb0b009",
-        "createdAt": 1550973333911,
-        "username": "huel",
-        "hash": "$2b$10$Py0PPEGUWof2iTntcv7KIO/p1PgkxW9YD7hfs4ZxwWNPJL/x8MizO"
-    },
-    {
-        "id": "6e6fba08-2577-49f1-a725-1aa0adbaf7ca",
-        "createdAt": 1550973652838,
-        "username": "nico",
-        "hash": "$2b$10$Zj4QflscrUrQaa.TZCUP1.A86K1AXp2kdsAyRA5OhQgkzOQETqhO2"
-    }
+[
+  {
+    "id": "2bab4456-f3b6-44c1-a81a-bae9deb0b009",
+    "createdAt": 1550973333911,
+    "username": "huel",
+    "hash": "$2b$10$Py0PPEGUWof2iTntcv7KIO/p1PgkxW9YD7hfs4ZxwWNPJL/x8MizO"
+  },
+  {
+    "id": "6e6fba08-2577-49f1-a725-1aa0adbaf7ca",
+    "createdAt": 1550973652838,
+    "username": "nico",
+    "hash": "$2b$10$Zj4QflscrUrQaa.TZCUP1.A86K1AXp2kdsAyRA5OhQgkzOQETqhO2"
+  },
+  {
+    "id": "62ee731b-8fda-45c7-a63f-d88815d0dd88",
+    "createdAt": 1551040179891,
+    "username": "asd",
+    "hash": "$2b$10$1aPr25l8e7VmbtjXlk1sSeId8h82VPVOQYz7STrTv9XQybz1NcGVq"
+  },
+  {
+    "id": "77d35c3c-8fc4-48c1-ba87-7d6d77cf83fd",
+    "createdAt": 1551040227585,
+    "username": "asd",
+    "hash": "$2b$10$Be.1M7o/JABhzPfL5aJd..T4XpHk4C249u4YyNi5LjpituAn3uoXW"
+  }
 ]

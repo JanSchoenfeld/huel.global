@@ -7,9 +7,9 @@ const router = express.Router();
 
 //load json file with user arrays into users
 const users = JSON.parse(fs.readFileSync('./users.json'));
-
 //expiration time for cookies (ms * s * min * h) = 2 hours
-const expTime = 1000 * 60 * 60 * 2;
+const expTime = 1000 * 20 * 60 * 2;
+
 
 router.get('/', (req, res) => {
     res.render('sign-in');
@@ -27,9 +27,7 @@ router.post('/', (req, res) => {
     if (user != undefined) {
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
-                res.cookie('jwt', createToken(user), {
-                    expires: new Date(Date.now() + expTime)
-                });
+                res.cookie('jwt', createToken(user))
                 res.send('korrektes passwort, korrekter typ');
             } else {
                 res.clearCookie('jwt');
@@ -47,7 +45,8 @@ function createToken(user) {
     const claimsSet = {
         id: user.id,
         name: user.username,
-        iat: Date.now()
+        iat: Date.now(),
+        exp: Date.now() + expTime
     };
     return jwt.sign(claimsSet, 'secret', {
         algorithm: 'HS256'

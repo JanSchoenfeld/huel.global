@@ -7,7 +7,6 @@ const User = require('../models/user');
 const router = express.Router();
 
 //router object for /users
-
 router.get('/', (req, res) => {
     res.send('Welcome on /users!');
 });

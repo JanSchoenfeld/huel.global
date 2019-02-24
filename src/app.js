@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
 const users = require('./routes/users');
 const signIn = require('./routes/sign-in');
@@ -32,17 +33,35 @@ function configureApp(app) {
     app.set('view engine', 'hbs');
 
 
+    app.use('/sign-in', signIn);
+    app.use('/sign-up', signUp);
+    //middleware für authenthifizierung
+    app.use((req, res, next) => {
+        const token = req.cookies['jwt'] || '';
+        if (token != '') {
+            let userSession = jwt.verify(token, 'secret');
+            if (userSession.exp < Date.now()) {
+                res.clearCookie('jwt');
+                res.redirect('/sign-in');
+            } else {
+                res.locals.user = userSession;
+                next();
+            }
+        } else {
+            res.redirect('/sign-in');
+        }
+    });
+
+    
+    app.use('/users', users);
+
     app.get('/', (req, res) => {
-        res.redirect('/sign-in');
+        res.send('hallo in /');
     });
 
     app.get('/bye', (req, res) => {
         res.send('ok bye 4 eva');
     });
-
-    app.use('/sign-in', signIn);
-    app.use('/sign-up', signUp);
-    app.use('/users', users);
 
 }
 
