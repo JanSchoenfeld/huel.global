@@ -3,12 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 function startDB(app, callback) {
     const url = 'mongodb://localhost:27017';
     const options = {
-        useNewUrlParser: true,
-        auth: {
-            user: 'huel',
-            password: 'global'
-        },
-        authSource: 'hgDb'
+        useNewUrlParser: true
     };
 
     MongoClient.connect(url, options, (err, client) => {
@@ -17,6 +12,7 @@ function startDB(app, callback) {
             process.exit(1);
         } else {
             app.locals.db = client.db('hgDb');
+            console.log('MongoDB connection established');
             callback();
         }
     });

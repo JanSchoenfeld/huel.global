@@ -3,6 +3,7 @@ const startDB = require('./db');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
 const users = require('./routes/users');
@@ -10,6 +11,8 @@ const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
 
 const port = 3000;
+
+const userArray = JSON.parse(fs.readFileSync(path.join(__dirname, '../users.json')));
 
 function configureApp(app) {
 
@@ -76,6 +79,31 @@ function startHttpServer(app) {
     app.listen(port, () => {
         console.log(`Server listening at http://localhost:${port}`);
     });
+
+    //uncomment and run ONCE to persist current users from users.json to mongoDB
+    //collectionToDb(userArray, app.locals.db, 'users');
+}
+
+//function to add a single object or an array and inserts into chosen collection
+//params: 
+//data = single object or array of objects to persist
+//db = the reference to the currently connected mongoDB
+//collectionName = name of the collection as String
+function collectionToDb(data, db, collectionName) {
+    let collection = db.collection(collectionName);
+    if (Array.isArray(data)) {
+        collection.insertMany(data, (err, result) => {
+            if (!err) {
+                console.log('Inserted ' + result.insertedCount + ' into ' + collectionName);
+            }
+        });
+    } else {
+        collection.insertOne(data, (err, result) => {
+            if (!err) {
+                console.log('Inserted ' + result.insertedCount + ' into ' + collectionName);
+            }
+        });
+    }
 }
 
 start();

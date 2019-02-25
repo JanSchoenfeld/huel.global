@@ -10,23 +10,5 @@
     "createdAt": 1550973652838,
     "username": "nico",
     "hash": "$2b$10$Zj4QflscrUrQaa.TZCUP1.A86K1AXp2kdsAyRA5OhQgkzOQETqhO2"
-  },
-  {
-    "id": "62ee731b-8fda-45c7-a63f-d88815d0dd88",
-    "createdAt": 1551040179891,
-    "username": "asd",
-    "hash": "$2b$10$1aPr25l8e7VmbtjXlk1sSeId8h82VPVOQYz7STrTv9XQybz1NcGVq"
-  },
-  {
-    "id": "77d35c3c-8fc4-48c1-ba87-7d6d77cf83fd",
-    "createdAt": 1551040227585,
-    "username": "asd",
-    "hash": "$2b$10$Be.1M7o/JABhzPfL5aJd..T4XpHk4C249u4YyNi5LjpituAn3uoXW"
-  },
-  {
-    "id": "5dca5f71-aca7-4770-b58f-973948f124a0",
-    "createdAt": 1551042695383,
-    "username": "asd",
-    "hash": "$2b$10$Fs3pKQsAXUIwNl3r52DXI.WIy2zbe46dITp57.JDtCI403P9uwCJ2"
   }
 ]
