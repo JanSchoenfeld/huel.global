@@ -1,4 +1,5 @@
 const express = require('express');
+const startDB = require('./db');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
@@ -9,8 +10,6 @@ const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
 
 const port = 3000;
-
-const app = express();
 
 function configureApp(app) {
 
@@ -52,7 +51,7 @@ function configureApp(app) {
         }
     });
 
-    
+
     app.use('/users', users);
 
     app.get('/', (req, res) => {
@@ -67,8 +66,13 @@ function configureApp(app) {
 
 function start() {
 
+    const app = express();
     configureApp(app);
+    startDB(app, () => startHttpServer(app));
 
+}
+
+function startHttpServer(app) {
     app.listen(port, () => {
         console.log(`Server listening at http://localhost:${port}`);
     });
