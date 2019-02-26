@@ -10,5 +10,11 @@
     "createdAt": 1550973652838,
     "username": "nico",
     "hash": "$2b$10$Zj4QflscrUrQaa.TZCUP1.A86K1AXp2kdsAyRA5OhQgkzOQETqhO2"
+  },
+  {
+    "id": "b8cf781f-9ddf-4501-b06c-2a930e5a628a",
+    "createdAt": 1551141547748,
+    "username": "rene",
+    "hash": "$2b$10$ZbWPDsQTXMpqU1F/wpXK6.qu.JiUgIyxFNlk8jj3HgH/QbqWweeGi"
   }
 ]

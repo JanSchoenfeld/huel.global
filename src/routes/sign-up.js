@@ -3,9 +3,9 @@ const fs = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const MongoAPI = require('../models/mongo-api');
 
 const router = express.Router();
-const users = JSON.parse(fs.readFileSync('./users.json'));
 
 //cookie expiration time
 const expTime = 1000 * 60 * 60 * 2;
@@ -17,14 +17,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         let user = new User(req.body.username, hash);
-        users.push(user);
-        fs.writeFileSync('./users.json', JSON.stringify(users, null, 2), 'utf8', (err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
+
+        const mongoUser = new MongoAPI(req.app.locals.db, 'users');
+        mongoUser.create(user);
+        const filter = {"id": user.id};
         res.cookie('jwt', createToken(user));
-        res.send(JSON.stringify(user, null, 2));
+        //maybe use a promise?
+        res.send(mongoUser.findOne(filter));
     });
 });
 

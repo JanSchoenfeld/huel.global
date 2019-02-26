@@ -3,7 +3,12 @@ const MongoClient = require('mongodb').MongoClient;
 function startDB(app, callback) {
     const url = 'mongodb://localhost:27017';
     const options = {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        auth: {
+            user: 'huel',
+            password: 'global'
+        },
+        authSource: 'hgDb'
     };
 
     MongoClient.connect(url, options, (err, client) => {
