@@ -11,7 +11,12 @@ const expTime = 1000 * 60 * 60 * 2;
 
 
 router.get('/', (req, res) => {
-    res.render('sign-in');
+    res.render('sign-in', {
+        error: {
+            invalidCredentials: req.query.err === 'ic',
+            userNotFound: req.query.err === 'unf'
+        }
+    });
 });
 
 //checks if form passwort is equal to hash in users.json
@@ -30,12 +35,12 @@ router.post('/', async (req, res) => {
                 res.redirect('/');
             } else {
                 res.clearCookie('jwt');
-                res.send('passwort nix korrekt');
+                res.redirect('/sign-in?err=ic');
             }
         });
     } else {
         res.clearCookie('jwt');
-        res.send('user existiert nicht!');
+        res.redirect('/sign-in?err=unf');
     }
 
 });

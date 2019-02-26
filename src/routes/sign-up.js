@@ -11,7 +11,11 @@ const router = express.Router();
 const expTime = 1000 * 60 * 60 * 2;
 
 router.get('/', (req, res) => {
-    res.render('sign-up');
+    res.render('sign-up', {
+        error: {
+            userTaken: req.query.err === 'ut'
+        }
+    });
 });
 
 router.post('/', async (req, res) => {
@@ -21,7 +25,7 @@ router.post('/', async (req, res) => {
         "username": req.body.username
     });
     if (testIfUserExists) {
-        res.send('user existiert bereits');
+        res.redirect('/sign-up?err=ut');
     } else {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
             const user = new User(req.body.username, hash);
