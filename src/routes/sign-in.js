@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
             if (isValid) {
                 res.cookie('jwt', createToken(user));
                 res.locals.user = user;
-                res.send('korrektes passwort, korrekter typ');
+                res.redirect('/');
             } else {
                 res.clearCookie('jwt');
                 res.send('passwort nix korrekt');

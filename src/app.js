@@ -58,7 +58,12 @@ function configureApp(app) {
     app.use('/users', users);
 
     app.get('/', (req, res) => {
-        res.send('hallo in /');
+        res.render('home');
+    });
+
+    app.get('/sign-out', (req,res)=>{
+        res.clearCookie('jwt');
+        res.redirect('/');
     });
 
     app.get('/bye', (req, res) => {

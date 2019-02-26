@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
             });
             res.app.locals.user = result;
             res.cookie('jwt', createToken(user));
-            res.send(res.app.locals.user);
+            res.redirect('/');
         });
     }
 });
