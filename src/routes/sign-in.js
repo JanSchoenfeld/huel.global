@@ -2,11 +2,10 @@ const express = require('express');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const MongoAPI = require('../models/mongo-api');
 
 const router = express.Router();
 
-//load json file with user arrays into users
-const users = JSON.parse(fs.readFileSync('./users.json'));
 //expiration time for cookies (ms * s * min * h) = 2 hours
 const expTime = 1000 * 60 * 60 * 2;
 
@@ -16,18 +15,18 @@ router.get('/', (req, res) => {
 });
 
 //checks if form passwort is equal to hash in users.json
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
-    let user = users.find(function (element) {
-        if (element.username === req.body.username) {
-            return element;
-        }
+    const mongoUser = new MongoAPI(req.app.locals.db, 'users');
+    const user = await mongoUser.findOne({
+        'username': req.body.username
     });
 
     if (user != undefined) {
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
                 res.cookie('jwt', createToken(user));
+                res.locals.user = user;
                 res.send('korrektes passwort, korrekter typ');
             } else {
                 res.clearCookie('jwt');

@@ -14,17 +14,27 @@ router.get('/', (req, res) => {
     res.render('sign-up');
 });
 
-router.post('/', (req, res) => {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
-        let user = new User(req.body.username, hash);
+router.post('/', async (req, res) => {
 
-        const mongoUser = new MongoAPI(req.app.locals.db, 'users');
-        mongoUser.create(user);
-        const filter = {"id": user.id};
-        res.cookie('jwt', createToken(user));
-        //maybe use a promise?
-        res.send(mongoUser.findOne(filter));
+    const mongoUser = new MongoAPI(req.app.locals.db, 'users');
+    const testIfUserExists = await mongoUser.findOne({
+        "username": req.body.username
     });
+    if (testIfUserExists) {
+        res.send('user existiert bereits');
+    } else {
+        bcrypt.hash(req.body.password, 10, async (err, hash) => {
+            const user = new User(req.body.username, hash);
+            await mongoUser.create(user);
+            //maybe exclude hash?
+            const result = await mongoUser.findOne({
+                "id": user.id
+            });
+            res.app.locals.user = result;
+            res.cookie('jwt', createToken(user));
+            res.send(res.app.locals.user);
+        });
+    }
 });
 
 function createToken(user) {

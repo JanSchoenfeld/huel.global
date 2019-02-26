@@ -4,12 +4,12 @@ class MongoAPI {
         this.collection = collection;
     }
 
-    create(entity) {
+    async create(entity) {
         const result = this.db.collection(this.collection).insertOne(entity);
         return result;
     }
 
-    findAll(entityFilter) {
+    async findAll(entityFilter) {
         return this.db.collection(this.collection)
             .find(entityFilter)
             .sort({
@@ -18,14 +18,12 @@ class MongoAPI {
             .toArray();
     }
 
-    findOne(entityFilter) {
+    async findOne(entityFilter) {
         return this.db.collection(this.collection)
-            .findOne(entityFilter, (err, document) => {
-                console.log(document);
-            });
+            .findOne(entityFilter);
     }
 
-    delete(id) {
+    async delete(id) {
         const result = this.db.collection(this.collection)
             .deleteOne({
                 id
