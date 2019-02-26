@@ -36,18 +36,30 @@ function configureApp(app) {
     app.use('/sign-in', signIn);
     app.use('/sign-up', signUp);
     //middleware für authenthifizierung
+
+    app.get('/sign-out', (req, res) => {
+        console.log('/sign-out');
+        res.app.locals.user = undefined;
+        res.clearCookie('jwt');
+        res.redirect('/');
+    });
+
     app.use((req, res, next) => {
+        console.log('auth middleware');
         const token = req.cookies.jwt || '';
         if (token != '') {
             let userSession = jwt.verify(token, 'secret');
             if (userSession.exp < Date.now()) {
+                console.log('cookie expired or invalid');
                 res.clearCookie('jwt');
                 res.redirect('/sign-in');
             } else {
-                res.locals.user = userSession;
+                console.log('cookie valid, go next');
+                res.app.locals.user = userSession;
                 next();
             }
         } else {
+            console.log('no jwttoken');
             res.redirect('/sign-in');
         }
     });
@@ -56,15 +68,13 @@ function configureApp(app) {
     app.use('/users', users);
 
     app.get('/', (req, res) => {
+        console.log('/');
         res.render('home');
     });
 
-    app.get('/sign-out', (req,res)=>{
-        res.clearCookie('jwt');
-        res.redirect('/');
-    });
 
     app.get('/bye', (req, res) => {
+        console.log('/bye');
         res.send('ok bye 4 eva');
     });
 

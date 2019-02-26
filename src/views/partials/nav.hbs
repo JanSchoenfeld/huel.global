@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav">
     {{#if user}}
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style="color: white">
           {{user.name}}
         </a>
         <div class="dropdown-menu dropdown-menu-right">
@@ -17,7 +17,7 @@
     {{else}}
       <li class="nav-item"><a class="nav-link" href="/sign-in">Sign In</a></li>
       <li class="nav-item"><a class="nav-link" href="/sign-up">Sign Up</a></li>
-      {{/if}}
+    {{/if}}
     </ul>
   </div>
 </nav>

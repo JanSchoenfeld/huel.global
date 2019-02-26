@@ -11,20 +11,26 @@ const router = express.Router();
 const expTime = 1000 * 60 * 60 * 2;
 
 router.get('/', (req, res) => {
-    res.render('sign-up', {
-        error: {
-            userTaken: req.query.err === 'ut'
-        }
-    });
+    console.log('get /sign-up');
+    if (req.app.locals.user != undefined) {
+        res.redirect('/');
+    } else {
+        res.render('sign-up', {
+            error: {
+                userTaken: req.query.err === 'ut'
+            }
+        });
+    }
 });
 
 router.post('/', async (req, res) => {
-
+    console.log('post /sign-up');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const testIfUserExists = await mongoUser.findOne({
         "username": req.body.username
     });
     if (testIfUserExists) {
+        console.log('/sign-up?err=ut');
         res.redirect('/sign-up?err=ut');
     } else {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
@@ -35,6 +41,7 @@ router.post('/', async (req, res) => {
                 "id": user.id
             });
             res.app.locals.user = result;
+            console.log('/sign-up success');
             res.cookie('jwt', createToken(user));
             res.redirect('/');
         });
