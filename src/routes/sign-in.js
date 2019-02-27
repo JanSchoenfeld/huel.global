@@ -1,8 +1,7 @@
 const express = require('express');
-const fs = require('fs');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const MongoAPI = require('../models/mongo-api');
+const Token = require('../models/token');
 
 const router = express.Router();
 
@@ -36,8 +35,10 @@ router.post('/', async (req, res) => {
     if (user != null) {
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
-                res.cookie('jwt', createToken(user));
+                const token = new Token();
+                res.cookie('jwt', token.create(user));
                 res.locals.user = user;
+                console.log('login success as ' + user.username + ', cookie created');
                 res.redirect('/');
             } else {
                 console.log('pw wrong @sign-in');
@@ -53,16 +54,6 @@ router.post('/', async (req, res) => {
 
 });
 
-function createToken(user) {
-    const claimsSet = {
-        id: user.id,
-        name: user.username,
-        iat: Date.now(),
-        exp: Date.now() + expTime
-    };
-    return jwt.sign(claimsSet, 'secret', {
-        algorithm: 'HS256'
-    });
-}
+
 
 module.exports = router;

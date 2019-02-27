@@ -3,7 +3,6 @@ const startDB = require('./db');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
 const users = require('./routes/users');
