@@ -4,15 +4,17 @@
         <div class="col-md-8 col-lg-6">
             <div class="login d-flex align-items-center py-5">
                 <div class="container">
-                    {{#if error.userTaken}}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="wp-alert">
-                        <strong>Username already in use.</strong> Please, choose another one.
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    {{/if}}
                     <div class="row">
+
+                        {{#if error.userTaken}}
+                        <div class="alert alert-warning alert-dismissible fade show mx-auto" role="alert" id="wp-alert">
+                            <strong>Username already in use.</strong> Please, choose another one.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        {{/if}}
+                        
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4">Registration</h3>
                             <form action="/sign-up" method="POST" id="sign-up-form" onsubmit="return validate()">
