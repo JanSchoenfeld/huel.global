@@ -4,7 +4,7 @@ class Token {
 
     constructor() {
         this.iat = Date.now();
-        this.exp = Date.now() + 1000 * 60 * 60 * 2;
+        this.exp = Date.now() + 1000 * 10; //* 60 * 2;
     }
 
     create(user) {

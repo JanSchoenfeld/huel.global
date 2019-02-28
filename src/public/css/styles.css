@@ -23,7 +23,7 @@ html {
 
 #content {
   padding-top: 56px;
-  padding-bottom: 6vh;
+  padding-bottom: 5vh;
 }
 
 .center-vertically {
@@ -35,7 +35,7 @@ html {
 footer {
   position: fixed;
   bottom: 0;
-  height: 6vh;
+  height: 5vh;
   width: 100%;
   /* Set the fixed height of the footer here */
   border: 1px solid;

@@ -50,6 +50,7 @@ function configureApp(app) {
             let userSession = jwt.verify(token, 'secret');
             if (userSession.exp < Date.now()) {
                 console.log('cookie expired or invalid');
+                res.app.locals.user = undefined;
                 res.clearCookie('jwt');
                 res.redirect('/sign-in');
             } else {
