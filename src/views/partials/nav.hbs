@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="/"><span class="fa fa-list-ul mr-3"></span>huel.global</a>
+  <a class="navbar-brand" href="/">huel.global</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,16 +7,16 @@
     <ul class="navbar-nav">
     {{#if user}}
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-          {{user.name}}
+          <i class="fas fa-user"></i> {{user.name}}
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" >Account Settings</a>
+          <a class="dropdown-item"><i class="far fa-user"></i>  Account Settings</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/sign-out">Sign Out</a>
+          <a class="dropdown-item" href="/sign-out"><i class="fas fa-sign-out-alt"></i>  Sign Out</a>
         </div>
     {{else}}
-      <li class="nav-item"><a class="nav-link" href="/sign-in">Sign In</a></li>
-      <li class="nav-item"><a class="nav-link" href="/sign-up">Sign Up</a></li>
+      <li class="nav-item"><a class="nav-link" href="/sign-in"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+      <li class="nav-item"><a class="nav-link" href="/sign-up"><i class="fas fa-user-plus"></i> Sign Up</a></li>
     {{/if}}
     </ul>
   </div>
