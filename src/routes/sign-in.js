@@ -5,10 +5,6 @@ const Token = require('../models/token');
 
 const router = express.Router();
 
-//expiration time for cookies (ms * s * min * h) = 2 hours
-const expTime = 1000 * 60 * 60 * 2;
-
-
 router.get('/', (req, res) => {
     console.log('get /sign-in');
     if (req.app.locals.user != undefined) {

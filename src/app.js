@@ -47,7 +47,7 @@ function configureApp(app) {
         console.log('auth middleware');
         const token = req.cookies.jwt || '';
         if (token != '') {
-            let userSession = jwt.verify(token, 'secret');
+            const userSession = jwt.verify(token, 'secret');
             if (userSession.exp < Date.now()) {
                 console.log('cookie expired or invalid');
                 res.app.locals.user = undefined;
