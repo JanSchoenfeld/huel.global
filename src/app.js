@@ -71,7 +71,7 @@ function configureApp(app) {
 
     app.get('/', (req, res) => {
         console.log('/');
-        res.render('particles');
+        res.render('home');
     });
 
 

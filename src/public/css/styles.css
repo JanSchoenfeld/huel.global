@@ -12,6 +12,7 @@ html {
   box-sizing: inherit;
 }
 
+
 #navbarDropdown {
   color: white;
 }
@@ -19,11 +20,13 @@ html {
 #main {
   padding-left: 0px;
   padding-right: 0px;
+  z-index: 2;
 }
 
 #content {
-  padding-top: 56px;
-  padding-bottom: 5vh;
+  position: absolute;
+  z-index: -1;
+  background-color: rgb(255, 255, 255);
 }
 
 .center-vertically {
