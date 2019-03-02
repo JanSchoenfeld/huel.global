@@ -60,6 +60,8 @@ function configureApp(app) {
             }
         } else {
             console.log('no jwttoken');
+            res.app.locals.user = undefined;
+            res.clearCookie('jwt');
             res.redirect('/sign-in');
         }
     });
@@ -69,13 +71,12 @@ function configureApp(app) {
 
     app.get('/', (req, res) => {
         console.log('/');
-        res.render('home');
+        res.render('particles');
     });
 
 
     app.get('/bye', (req, res) => {
-        console.log('/bye');
-        res.send('ok bye 4 eva');
+        res.send('ok goodbye 4 eva');
     });
 
 }
