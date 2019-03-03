@@ -8,7 +8,7 @@ function startDB(app, callback) {
             user: 'jan',
             password: '3Z4zM7PP'
         },
-        authSource: 'admin'
+        authSource: 'test'
     };
 
     MongoClient.connect(url, options, (err, client) => {
