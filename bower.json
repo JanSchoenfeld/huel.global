@@ -6,7 +6,7 @@
     "JanSchoenfeld <jan.schoenfeld@fh-muenster.de>"
   ],
   "license": "ISC",
-  "homepage": "http://huel.global",
+  "homepage": "https://huel.global",
   "ignore": [
     "**/.*",
     "node_modules",
