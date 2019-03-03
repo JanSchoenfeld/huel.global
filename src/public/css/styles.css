@@ -23,11 +23,20 @@ html {
   z-index: 2;
 }
 
+.navbar-brand{
+  font-style: italic;
+
+}
+
+.navbar-brand i{
+  padding-right: .5em;
+}
+
 #content {
   position: absolute;
-  top: 15%;
   left: 30%;
   width: 40%;
+  margin-bottom: 7%;
   padding: 5vh;
   border: 1px solid red;
   border-radius: 2px;
@@ -42,16 +51,14 @@ html {
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  height: 5vh;
+  height: 10vh;
   width: 100%;
   /* Set the fixed height of the footer here */
-  border: 1px solid;
-  border-color: #c6c0c0;
-  background-color: rgb(236, 235, 235);
+  border: 1px solid red;
 }
 
 #ghlink {
-  color: black;
+  color: rgb(255, 255, 255);
 }
