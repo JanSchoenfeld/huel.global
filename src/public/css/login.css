@@ -27,7 +27,7 @@
     font-size: 0.9rem;
     letter-spacing: 0.05rem;
     padding: 0.75rem 1rem;
-    border-radius: 2rem;
+    border-radius: 4px;
   }
   
   .form-label-group {
@@ -39,7 +39,7 @@
   .form-label-group>label {
     padding: var(--input-padding-y) var(--input-padding-x);
     height: auto;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
   }
   
   .form-label-group>label {
