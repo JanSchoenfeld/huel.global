@@ -5,10 +5,10 @@ function startDB(app, callback) {
     const options = {
         useNewUrlParser: true,
         auth: {
-            user: 'jan',
-            password: '3Z4zM7PP'
+            user: 'huel',
+            password: 'global'
         },
-        authSource: 'test'
+        authSource: 'hgDb'
     };
 
     MongoClient.connect(url, options, (err, client) => {
@@ -16,7 +16,7 @@ function startDB(app, callback) {
             console.log('Could not connect to MongoDB: ', err.stack);
             process.exit(1);
         } else {
-            app.locals.db = client.db('hgdb');
+            app.locals.db = client.db('hgDb');
             console.log('MongoDB connection established');
             callback();
         }
