@@ -33,12 +33,11 @@
 
 <body>
 
-    <main class="container-fluid" id="main">
 
-        {{#if user}}
-        {{> particles}}
-        {{else}}
-        {{/if}}
+    {{> particles}}
+
+    <main class="container-fluid" id="main">
+        
         {{{body}}}
 
     </main>
@@ -46,9 +45,5 @@
 
 </body>
 
-{{#if user}}
-{{else}}
-{{> footer}}
-{{/if}}
 
 </html>
