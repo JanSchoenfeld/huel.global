@@ -25,12 +25,11 @@ html {
 
 #content {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 30%;
   width: 40%;
-  height: fit-content;
   padding: 5vh;
-  margin-bottom: 25vh;
+  border: 1px solid red;
   border-radius: 2px;
   z-index: 5;
   background-color: rgb(255, 255, 255);
