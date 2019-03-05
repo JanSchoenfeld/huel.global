@@ -1,6 +1,7 @@
 const particlesCanvas = document.getElementById('particles-js');
+const themeCookie = getCookie('theme');
 
-darkVector = {
+dark = {
     "particles": {
         "number": {
             "value": 110,
@@ -111,7 +112,7 @@ darkVector = {
     "retina_detect": false
 };
 
-defaultParticles = {
+red = {
     "particles": {
         "number": {
             "value": 80,
@@ -167,7 +168,7 @@ defaultParticles = {
         },
         "move": {
             "enable": true,
-            "speed": 6,
+            "speed": 5,
             "direction": "none",
             "random": false,
             "straight": false,
@@ -333,23 +334,47 @@ stars = {
     "retina_detect": true
 };
 
-function defaultTheme() {
-    particlesCanvas.style.setProperty("background-color", "#cc0b0b");
-    return particlesJS("particles-js", defaultParticles);
+function redTheme() {
+    particlesCanvas.style.setProperty("background-color", "#c5000d");
+    document.cookie = "theme=red";
+    return particlesJS("particles-js", red);
 }
 
 function darkTheme() {
     particlesCanvas.style.setProperty("background-color", "#000000");
-    return particlesJS("particles-js", darkVector);
+    document.cookie = "theme=dark";
+    return particlesJS("particles-js", dark);
 }
 
-function starTheme() {
+function starsTheme() {
     particlesCanvas.style.setProperty("background-color", "#262b4d");
+    document.cookie = "theme=stars";
     return particlesJS("particles-js", stars);
 }
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
+if (themeCookie === 'red') {
+    redTheme();
+} else if (themeCookie === 'dark'){
+    darkTheme();
+}else if (themeCookie === 'stars'){
+    starsTheme();
+}else{
+    starsTheme();
+}
 
-
-
-particlesJS("particles-js", darkVector);
