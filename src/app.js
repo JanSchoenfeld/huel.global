@@ -9,7 +9,7 @@ const users = require('./routes/users');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
 
-const port = 1337;
+const port = 3000;
 
 function configureApp(app) {
 

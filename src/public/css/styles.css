@@ -23,9 +23,11 @@ html {
   z-index: 2;
 }
 
+.nav {
+  position: relative;
+}
 
-
-.navbar-brand i{
+.navbar-brand i {
   padding-right: .5em;
 }
 
