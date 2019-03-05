@@ -368,6 +368,7 @@ function getCookie(cname) {
     return "";
   }
 
+  
 if (themeCookie === 'red') {
     redTheme();
 } else if (themeCookie === 'dark'){
