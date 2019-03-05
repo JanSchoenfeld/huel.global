@@ -5,10 +5,10 @@ function startDB(app, callback) {
     const options = {
         useNewUrlParser: true,
         auth: {
-            user: 'huel',
-            password: 'global'
+            user: 'jan',
+            password: '3Z4zM7PP'
         },
-        authSource: 'hgDb'
+        authSource: 'test'
     };
 
     MongoClient.connect(url, options, (err, client) => {
