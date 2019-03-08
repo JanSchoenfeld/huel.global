@@ -211,7 +211,7 @@ red = {
                 "speed": 3
             },
             "repulse": {
-                "distance": 200,
+                "distance": 110,
                 "duration": 0.4
             },
             "push": {
