@@ -16,7 +16,7 @@ function startDB(app, callback) {
             console.log('Could not connect to MongoDB: ', err.stack);
             process.exit(1);
         } else {
-            app.locals.db = client.db('hgDb');
+            app.locals.db = client.db('hgdb');
             console.log('MongoDB connection established');
             callback();
         }
