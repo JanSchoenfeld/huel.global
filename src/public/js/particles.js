@@ -335,7 +335,7 @@ stars = {
 };
 
 function redTheme() {
-    particlesCanvas.style.setProperty("background-color", "#c5000d");
+    particlesCanvas.style.setProperty("background-color", "#ea2525");
     document.cookie = "theme=red";
     return particlesJS("particles-js", red);
 }
