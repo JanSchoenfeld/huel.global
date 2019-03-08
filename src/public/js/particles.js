@@ -1,12 +1,11 @@
 const particlesCanvas = document.getElementById('particles-js');
 const themeCookie = getCookie('theme');
 const themePicker = document.getElementById('');
-/* <i class="fas fa-check"></i> */
 
 dark = {
     "particles": {
         "number": {
-            "value": 110,
+            "value": 90,
             "density": {
                 "enable": true,
                 "value_area": 700
@@ -87,9 +86,9 @@ dark = {
         },
         "modes": {
             "grab": {
-                "distance": 170,
+                "distance": 200,
                 "line_linked": {
-                    "opacity": 1
+                    "opacity": 0.8
                 }
             },
             "bubble": {
