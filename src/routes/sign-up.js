@@ -34,9 +34,11 @@ router.post('/', async (req, res) => {
             const user = new User(req.body.username, hash);
             const token = new Token();
             await mongoUser.create(user);
-            //maybe exclude hash?
             const result = await mongoUser.findOne({
                 "id": user.id
+            }, {
+                hash: 0,
+                _id: 0
             });
             res.app.locals.user = result;
             console.log('registration success as ' + user.username + ', cookie created');

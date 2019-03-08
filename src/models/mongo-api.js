@@ -18,9 +18,9 @@ class MongoAPI {
             .toArray();
     }
 
-    async findOne(entityFilter) {
+    async findOne(entityFilter, projections) {
         return this.db.collection(this.collection)
-            .findOne(entityFilter);
+            .findOne(entityFilter, {projection: projections});
     }
 
     async delete(id) {

@@ -26,13 +26,15 @@ router.post('/', async (req, res) => {
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const user = await mongoUser.findOne({
         'username': req.body.username
+    }, {
+        _id: 0
     });
-
     if (user != null) {
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
                 const token = new Token();
                 res.cookie('jwt', token.create(user));
+                delete user.hash;
                 res.locals.user = user;
                 console.log('login success as ' + user.username + ', cookie created');
                 res.redirect('/');

@@ -1,10 +1,11 @@
 const particlesCanvas = document.getElementById('particles-js');
 const themeCookie = getCookie('theme');
+const themePicker = document.getElementById('');
 
 dark = {
     "particles": {
         "number": {
-            "value": 110,
+            "value": 90,
             "density": {
                 "enable": true,
                 "value_area": 700
@@ -85,9 +86,9 @@ dark = {
         },
         "modes": {
             "grab": {
-                "distance": 170,
+                "distance": 200,
                 "line_linked": {
-                    "opacity": 1
+                    "opacity": 0.8
                 }
             },
             "bubble": {
@@ -209,7 +210,7 @@ red = {
                 "speed": 3
             },
             "repulse": {
-                "distance": 200,
+                "distance": 110,
                 "duration": 0.4
             },
             "push": {
@@ -335,20 +336,29 @@ stars = {
 };
 
 function redTheme() {
-    particlesCanvas.style.setProperty("background-color", "#c5000d");
+    particlesCanvas.style.setProperty("background-color", "#ea2525");
     document.cookie = "theme=red";
+    document.getElementById("redSelected").style.setProperty("display", "inline");
+    document.getElementById("darkSelected").style.setProperty("display", "none");
+    document.getElementById("starsSelected").style.setProperty("display", "none");
     return particlesJS("particles-js", red);
 }
 
 function darkTheme() {
     particlesCanvas.style.setProperty("background-color", "#000000");
     document.cookie = "theme=dark";
+    document.getElementById("redSelected").style.setProperty("display", "none");
+    document.getElementById("darkSelected").style.setProperty("display", "inline");
+    document.getElementById("starsSelected").style.setProperty("display", "none");
     return particlesJS("particles-js", dark);
 }
 
 function starsTheme() {
     particlesCanvas.style.setProperty("background-color", "#262b4d");
     document.cookie = "theme=stars";
+    document.getElementById("redSelected").style.setProperty("display", "none");
+    document.getElementById("darkSelected").style.setProperty("display", "none");
+    document.getElementById("starsSelected").style.setProperty("display", "inline");
     return particlesJS("particles-js", stars);
 }
 
@@ -356,26 +366,25 @@ function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
-  }
+}
 
   
 if (themeCookie === 'red') {
     redTheme();
-} else if (themeCookie === 'dark'){
+} else if (themeCookie === 'dark') {
     darkTheme();
-}else if (themeCookie === 'stars'){
+} else if (themeCookie === 'stars') {
     starsTheme();
-}else{
+} else {
     starsTheme();
 }
-
