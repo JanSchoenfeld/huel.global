@@ -3,7 +3,6 @@ const startDB = require('./db');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const expressip = require('express-ip');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
@@ -30,7 +29,6 @@ function configureApp(app) {
     }));
     app.use(bodyParser.json());
     app.use(cookieParser());
-    app.use(expressip().getIpInfoMiddleware);
     app.engine('hbs', exphbs(engineConfig));
     app.set('trust proxy', true);
     app.set('views', path.join(__dirname, 'views'));
@@ -81,11 +79,7 @@ function configureApp(app) {
 
 
     app.get('/bye', (req, res) => {
-<<<<<<< HEAD
-        res.send(JSON.stringify(req.ipInfo));
-=======
         res.send(JSON.stringify(req.ip));
->>>>>>> origin/master
     });
 
 }
