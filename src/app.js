@@ -32,6 +32,7 @@ function configureApp(app) {
     app.use(cookieParser());
     app.use(expressip().getIpInfoMiddleware);
     app.engine('hbs', exphbs(engineConfig));
+    app.set('trust proxy', true);
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
 
@@ -80,7 +81,11 @@ function configureApp(app) {
 
 
     app.get('/bye', (req, res) => {
+<<<<<<< HEAD
         res.send(JSON.stringify(req.ipInfo));
+=======
+        res.send(JSON.stringify(req.ip));
+>>>>>>> origin/master
     });
 
 }
