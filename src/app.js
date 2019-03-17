@@ -30,6 +30,7 @@ function configureApp(app) {
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.engine('hbs', exphbs(engineConfig));
+    app.set('trust proxy', true);
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
 
@@ -78,7 +79,7 @@ function configureApp(app) {
 
 
     app.get('/bye', (req, res) => {
-        res.send('ok goodbye 4 eva');
+        res.send(JSON.stringify(req.ip));
     });
 
 }
