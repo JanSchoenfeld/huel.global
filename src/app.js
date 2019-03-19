@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
 const users = require('./routes/users');
@@ -34,6 +35,23 @@ function configureApp(app) {
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
 
+    app.use((req, res, next) => {
+        if (req.app.locals.user != undefined) {
+            console.log(req.app.locals.user);
+            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " at " + new Date().toLocaleString() + " as " + req.app.locals.user.name + "\n", (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        } else {
+            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " at " + new Date().toLocaleString() + "\n", (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }
+        next();
+    });
 
     app.use('/sign-in', signIn);
     app.use('/sign-up', signUp);
