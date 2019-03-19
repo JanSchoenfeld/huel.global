@@ -7,7 +7,6 @@ const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
-const users = require('./routes/users');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
 
@@ -86,9 +85,6 @@ function configureApp(app) {
         }
     });
 
-
-    app.use('/users', users);
-
     app.get('/', (req, res) => {
         console.log('/');
         res.render('home');
@@ -96,7 +92,7 @@ function configureApp(app) {
 
 
     app.get('/bye', (req, res) => {
-        res.send(JSON.stringify(req.ip));
+        res.send('ok goodbye 4 eva');
     });
 
 }
