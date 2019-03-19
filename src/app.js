@@ -36,13 +36,13 @@ function configureApp(app) {
 
     app.use((req, res, next) => {
         if (req.app.locals.user != undefined) {
-            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " at " + new Date().toLocaleString() + " as " + req.app.locals.user.name + "\n", (err) => {
+            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " on " + new Date().toLocaleString() + " as " + req.app.locals.user.name + "\n", (err) => {
                 if (err) {
                     console.log(err);
                 }
             });
         } else {
-            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " at " + new Date().toLocaleString() + "\n", (err) => {
+            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " on " + new Date().toLocaleString() + "\n", (err) => {
                 if (err) {
                     console.log(err);
                 }
