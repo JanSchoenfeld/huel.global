@@ -7,7 +7,6 @@ const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
-const users = require('./routes/users');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
 
@@ -37,7 +36,6 @@ function configureApp(app) {
 
     app.use((req, res, next) => {
         if (req.app.locals.user != undefined) {
-            console.log(req.app.locals.user);
             fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " at " + new Date().toLocaleString() + " as " + req.app.locals.user.name + "\n", (err) => {
                 if (err) {
                     console.log(err);
@@ -87,9 +85,6 @@ function configureApp(app) {
         }
     });
 
-
-    app.use('/users', users);
-
     app.get('/', (req, res) => {
         console.log('/');
         res.render('home');
@@ -97,7 +92,7 @@ function configureApp(app) {
 
 
     app.get('/bye', (req, res) => {
-        res.send(JSON.stringify(req.ip));
+        res.send('ok goodbye 4 eva');
     });
 
 }
