@@ -8,7 +8,6 @@ const Token = require('../models/token');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log('get /sign-up');
     if (req.app.locals.user != undefined) {
         res.redirect('/');
     } else {
@@ -21,13 +20,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log('post /sign-up');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const testIfUserExists = await mongoUser.findOne({
         "username": req.body.username
     });
     if (testIfUserExists) {
-        console.log('/sign-up?err=ut');
         res.redirect('/sign-up?err=ut');
     } else {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
@@ -41,7 +38,6 @@ router.post('/', async (req, res) => {
                 _id: 0
             });
             res.app.locals.user = result;
-            console.log('registration success as ' + user.username + ', cookie created');
             res.cookie('jwt', token.create(user));
             res.redirect('/');
         });

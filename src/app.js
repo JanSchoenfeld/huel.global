@@ -38,13 +38,13 @@ function configureApp(app) {
         if (req.app.locals.user != undefined) {
             fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " on " + new Date().toLocaleString() + " as " + req.app.locals.user.name + "\n", (err) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                 }
             });
         } else {
             fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " on " + new Date().toLocaleString() + "\n", (err) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                 }
             });
         }
@@ -56,29 +56,24 @@ function configureApp(app) {
     //middleware für authenthifizierung
 
     app.get('/sign-out', (req, res) => {
-        console.log('/sign-out');
         res.app.locals.user = undefined;
         res.clearCookie('jwt');
         res.redirect('/');
     });
 
     app.use((req, res, next) => {
-        console.log('auth middleware');
         const token = req.cookies.jwt || '';
         if (token != '') {
             const userSession = jwt.verify(token, 'secret');
             if (userSession.exp < Date.now()) {
-                console.log('cookie expired or invalid');
                 res.app.locals.user = undefined;
                 res.clearCookie('jwt');
                 res.redirect('/sign-in');
             } else {
-                console.log('cookie valid, go next');
                 res.app.locals.user = userSession;
                 next();
             }
         } else {
-            console.log('no jwttoken');
             res.app.locals.user = undefined;
             res.clearCookie('jwt');
             res.redirect('/sign-in');
@@ -86,7 +81,6 @@ function configureApp(app) {
     });
 
     app.get('/', (req, res) => {
-        console.log('/');
         res.render('home');
     });
 
