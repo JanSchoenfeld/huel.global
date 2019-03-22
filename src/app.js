@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
+const helper = require('./models/helper');
 const Logger = require('./models/logger');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
