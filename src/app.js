@@ -7,8 +7,10 @@ const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
+const Logger = require('./models/logger');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
+const privacyPolicy = require('./routes/privacy-policy');
 
 const port = 3000;
 
@@ -20,6 +22,8 @@ function configureApp(app) {
         partialsDir: path.join(__dirname, 'views', 'partials'),
         defaultLayout: 'main'
     };
+
+    const logger = new Logger();
 
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(express.static(path.join(__dirname, '../bower_components')));
@@ -35,26 +39,15 @@ function configureApp(app) {
     app.set('view engine', 'hbs');
 
     app.use((req, res, next) => {
-        if (req.app.locals.user != undefined) {
-            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " on " + new Date().toLocaleString() + " as " + req.app.locals.user.name + "\n", (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
-        } else {
-            fs.appendFile('connection_logs.txt', req.ip + " connected to " + req.originalUrl + " on " + new Date().toLocaleString() + "\n", (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
-        }
+        logger.writeLog(req);
         next();
     });
 
     app.use('/sign-in', signIn);
     app.use('/sign-up', signUp);
-    //middleware für authenthifizierung
+    app.use('/privacy-policy', privacyPolicy);
 
+    //middleware für authenthifizierung
     app.get('/sign-out', (req, res) => {
         console.log('/sign-out');
         res.app.locals.user = undefined;

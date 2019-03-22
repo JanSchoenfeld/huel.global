@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) =>  {
     console.log('post /sign-up');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const testIfUserExists = await mongoUser.findOne({
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
                 hash: 0,
                 _id: 0
             });
-            res.app.locals.user = result;
+            res .locals.user = result;
             console.log('registration success as ' + user.username + ', cookie created');
             res.cookie('jwt', token.create(user));
             res.redirect('/');
