@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
 const helper = require('./models/helper');
