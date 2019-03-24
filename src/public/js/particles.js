@@ -1,6 +1,5 @@
 const particlesCanvas = document.getElementById('particles-js');
 const themeCookie = getCookie('theme');
-const themePicker = document.getElementById('');
 
 dark = {
     "particles": {

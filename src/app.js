@@ -1,6 +1,7 @@
 const express = require('express');
 const startDB = require('./db');
 const helmet = require('helmet');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
@@ -28,6 +29,8 @@ function configureApp(app) {
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(express.static(path.join(__dirname, '../bower_components')));
     app.use(helmet());
+    // app.use(cors());
+    // app.options('*', cors());
     app.use(bodyParser.urlencoded({
         extended: true
     }));
