@@ -11,6 +11,7 @@ const helper = require('./models/helper');
 const Logger = require('./models/logger');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
+const home = require('./routes/home');
 const privacyPolicy = require('./routes/privacy-policy');
 
 const port = 3000;
@@ -81,10 +82,7 @@ function configureApp(app) {
         }
     });
 
-    app.get('/', (req, res) => {
-        console.log('/');
-        res.render('home');
-    });
+    app.use('/', home);
 
 
     app.get('/bye', (req, res) => {

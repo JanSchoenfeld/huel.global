@@ -1,22 +1,17 @@
 <div class="container-fluid" id="content" style="top: 15%">
     <form>
         <div class="row">
-            <div class="form-group col-3">
+            <div class="form-group col-4">
                 <label>Cryptocurrency</label>
                 <select class="form-control" id="cryptoPicker">
+                    {{#each coins}}
+                    <option>{{name}} | {{symbol}}</option>
+                    {{/each}}
                 </select>
             </div>
-            <div class="form-group col-2">
+            <div class="form-group col-4">
                 <label>Quantity</label>
                 <input type="number" min="0" class="form-control" placeholder="0" required>
-            </div>
-            <div class="form-group col-3">
-                <label>Exchange</label>
-                <select class="form-control" id="exchangePicker">
-                    <option>Bittrex</option>
-                    <option>Binance</option>
-                    <option>Coinbase</option>
-                </select>
             </div>
             <div class="form-group col-4">
                 <button type="submit" class="btn btn-primary">Add to Portfolio</button>
