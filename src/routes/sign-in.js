@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const user = await mongoUser.findOne({
-        'username': req.body.username
+        'username': req.body.username.toLowerCase()
     }, {
         _id: 0
     });

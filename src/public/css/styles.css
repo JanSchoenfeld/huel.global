@@ -66,6 +66,10 @@ footer {
   border: 1px solid red;
 }
 
+#addToPortfolioBtn {
+  margin-top: 2rem
+}
+
 #ghlink {
   color: rgb(255, 255, 255);
 }

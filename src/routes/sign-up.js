@@ -18,7 +18,13 @@ router.get('/', (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 router.post('/', async (req, res) => {
+=======
+router.post('/', async (req, res) =>  {
+    console.log('post /sign-up');
+    req.body.username = req.body.username.toLowerCase();
+>>>>>>> origin/crypto
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const testIfUserExists = await mongoUser.findOne({
         "username": req.body.username
@@ -36,7 +42,12 @@ router.post('/', async (req, res) => {
                 hash: 0,
                 _id: 0
             });
+<<<<<<< HEAD
             res.app.locals.user = result;
+=======
+            res.locals.user = result;
+            console.log('registration success as ' + user.username + ', cookie created');
+>>>>>>> origin/crypto
             res.cookie('jwt', token.create(user));
             res.redirect('/');
         });
