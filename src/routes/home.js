@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
         }
     });
     const json = await response.json();
-    console.log(json.data.length);
     res.render('home', {
         coins: json.data
     });
