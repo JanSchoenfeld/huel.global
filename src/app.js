@@ -9,6 +9,7 @@ const exphbs = require('express-handlebars');
 const Logger = require('./models/logger');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
+const home = require('./routes/home');
 const privacyPolicy = require('./routes/privacy-policy');
 
 const port = 1337;
@@ -72,9 +73,13 @@ function configureApp(app) {
         }
     });
 
+<<<<<<< HEAD
     app.get('/', (req, res) => {
         res.render('home');
     });
+=======
+    app.use('/', home);
+>>>>>>> origin/crypto
 
 
     app.get('/bye', (req, res) => {
@@ -97,6 +102,7 @@ function startHttpServer(app) {
     });
 }
 
+start();
 
 // function collectionToDb(data, db, collectionName) {
 //     let collection = db.collection(collectionName);
@@ -114,5 +120,3 @@ function startHttpServer(app) {
 //         });
 //     }
 // }
-
-start();
