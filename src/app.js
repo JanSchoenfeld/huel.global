@@ -1,13 +1,11 @@
 const express = require('express');
 const startDB = require('./db');
 const helmet = require('helmet');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
-const helper = require('./models/helper');
 const Logger = require('./models/logger');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
@@ -30,8 +28,6 @@ function configureApp(app) {
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(express.static(path.join(__dirname, '../bower_components')));
     app.use(helmet());
-    // app.use(cors());
-    // app.options('*', cors());
     app.use(bodyParser.urlencoded({
         extended: true
     }));
@@ -105,6 +101,7 @@ function startHttpServer(app) {
     });
 }
 
+start();
 
 // function collectionToDb(data, db, collectionName) {
 //     let collection = db.collection(collectionName);
@@ -122,5 +119,3 @@ function startHttpServer(app) {
 //         });
 //     }
 // }
-
-start();
