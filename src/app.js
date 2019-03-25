@@ -73,13 +73,7 @@ function configureApp(app) {
         }
     });
 
-<<<<<<< HEAD
-    app.get('/', (req, res) => {
-        res.render('home');
-    });
-=======
     app.use('/', home);
->>>>>>> origin/crypto
 
 
     app.get('/bye', (req, res) => {
