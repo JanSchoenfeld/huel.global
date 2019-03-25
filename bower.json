@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "Font-Awesome": "^5.7.2",
-    "particles.js": "^2.0.0"
+    "particles.js": "^2.0.0",
+    "bootstrap-select": "^1.13.8"
   }
 }
