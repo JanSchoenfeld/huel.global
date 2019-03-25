@@ -3,7 +3,7 @@
         <div class="row">
             <div class="form-group col-4">
                 <label>Cryptocurrency</label>
-                <select class="form-control" id="cryptoPicker">
+                <select class="selectpicker form-control" data-live-search="true" title="Cryptocurrency" id="cryptoPicker">
                     {{#each coins}}
                     <option>{{name}} | {{symbol}}</option>
                     {{/each}}
@@ -19,4 +19,3 @@
         </div>
     </form>
 </div>
-<script type="text/javascript" src="js/home.js" defer></script>
