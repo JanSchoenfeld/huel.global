@@ -19,9 +19,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    //console.log(req.app.locals.user);
     let updatedUser = req.app.locals.user;
-    if (!updatedUser.portfolio) {
+    if (!updatedUser.portfolio.length) {
         updatedUser.portfolio = [];
     }
     updatedUser.portfolio.push(req.body);
@@ -29,7 +28,6 @@ router.post('/', async (req, res) => {
     const result = await mongoUser.update(updatedUser);
     if (result) {
         res.locals.user = updatedUser;
-        console.log(res.locals.user);
         res.redirect('/');
     } else {
         res.send("DBerror");

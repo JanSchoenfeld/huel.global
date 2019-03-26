@@ -24,10 +24,15 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     console.log('post /sign-in');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
+    //TODO portfolio mit importieren
     const user = await mongoUser.findOne({
         'username': req.body.username.toLowerCase()
     }, {
-        _id: 0
+        _id: 0,
+        id: 1,
+        name: 1,
+        portfolio: 1,
+        hash: 1
     });
     if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
