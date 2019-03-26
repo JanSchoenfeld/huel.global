@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     }, {
         _id: 0
     });
-    if (user != null) {
+    if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
                 const token = new Token();

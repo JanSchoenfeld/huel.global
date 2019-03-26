@@ -1,5 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
+const MongoAPI = require('../models/mongo-api');
 
 const router = express.Router();
 const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
@@ -15,6 +16,24 @@ router.get('/', async (req, res) => {
     res.render('home', {
         coins: json.data
     });
+});
+
+router.post('/', async (req, res) => {
+    //console.log(req.app.locals.user);
+    let updatedUser = req.app.locals.user;
+    if (!updatedUser.portfolio) {
+        updatedUser.portfolio = [];
+    }
+    updatedUser.portfolio.push(req.body);
+    const mongoUser = new MongoAPI(req.app.locals.db, 'users');
+    const result = await mongoUser.update(updatedUser);
+    if (result) {
+        res.locals.user = updatedUser;
+        console.log(res.locals.user);
+        res.redirect('/');
+    } else {
+        res.send("DBerror");
+    }
 });
 
 module.exports = router;
