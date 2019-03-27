@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     let updatedUser = req.app.locals.user;
-    if (!updatedUser.portfolio.length) {
+    if (!updatedUser.portfolio) {
         updatedUser.portfolio = [];
     }
     updatedUser.portfolio.push(req.body);
