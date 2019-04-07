@@ -9,6 +9,7 @@ const exphbs = require('express-handlebars');
 const Logger = require('./models/logger');
 const signIn = require('./routes/sign-in');
 const signUp = require('./routes/sign-up');
+const billing = require('./routes/billing');
 const home = require('./routes/home');
 const privacyPolicy = require('./routes/privacy-policy');
 
@@ -79,6 +80,7 @@ function configureApp(app) {
     });
 
     app.use('/', home);
+    app.use('/billing', billing);
 
 
     app.get('/bye', (req, res) => {
