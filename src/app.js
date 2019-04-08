@@ -16,7 +16,7 @@ const privacyPolicy = require('./routes/privacy-policy');
 const port = 3000;
 
 function configureApp(app) {
-console.log('APP START IN ' + __dirname);
+    
     const engineConfig = {
         extname: '.hbs',
         layoutsDir: path.join(__dirname, 'views', 'layouts'),

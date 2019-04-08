@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 
     // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
     fs.writeFileSync(path.resolve(__dirname, '../../billingres/output/outputBill.docx'), buffer);
-    res.send('Rechnung erfolgreich erstellt!');
+    res.redirect('/billing/output');
 });
 
 router.get('/output', async (req, res) => {
@@ -47,6 +47,12 @@ router.get('/output', async (req, res) => {
     }
     res.locals.bill = result.value;
     res.render('bill-output');
+});
+
+router.get('/download', (req, res) =>{
+    const filePath = path.join(__dirname, '../../billingres/output/outputBill.docx');
+    const fileName = 'rechnung.docx';
+    res.download(filePath, fileName);
 });
 
 function prepareTemplater() {
