@@ -1,6 +1,7 @@
 const express = require('express');
 const JSZip = require('jszip');
 const Docxtemplater = require('docxtemplater');
+const mammoth = require('mammoth');
 const Bill = require('../models/bill');
 const fs = require('fs');
 const path = require('path');
@@ -8,11 +9,13 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+    console.log('billing');
     res.render('billing');
 });
 
 router.post('/', (req, res) => {
     //set the templatevariables
+    console.log('post an /billing');
     const bill = new Bill(req.body.nameZb, req.body.fileNumber, req.body.identNr, req.body.workMin, req.body.fkCount, req.body.phoneCount, req.body.copyCount, req.body.porto);
 
     let doc = prepareTemplater();
@@ -32,14 +35,24 @@ router.post('/', (req, res) => {
         });
 
     // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
-    fs.writeFileSync(path.resolve(__dirname, '../../billing/output/outputBill.docx'), buffer);
+    fs.writeFileSync(path.resolve(__dirname, '../../billingres/output/outputBill.docx'), buffer);
     res.send('Rechnung erfolgreich erstellt!');
+});
+
+router.get('/output', async (req, res) => {
+    console.log('/billing/output');
+    const result = await mammoth.convertToHtml({path: path.join(__dirname, '../../billingres/output/outputBill.docx')});
+    if(!result){
+        console.error('fehler beim parsen');
+    }
+    res.locals.bill = result.value;
+    res.render('bill-output');
 });
 
 function prepareTemplater() {
     //Load the docx file as a binary
     let content = fs
-        .readFileSync(path.resolve(__dirname, '../../billing/templates/inputBill.docx'), 'binary');
+        .readFileSync(path.resolve(__dirname, '../../billingres/templates/inputBill.docx'), 'binary');
 
     let zip = new JSZip(content);
 
