@@ -19,7 +19,7 @@ class Bill {
         this.copyCost = 0.15;
         this.copySum = round(copyCount * this.copyCost);
         this.porto = porto;
-        this.sum = round(this.workSum + this.fkSum + this.phoneSum + this.copySum + this.porto);
+        this.sum = round(this.workSum + this.fkSum + this.phoneSum + this.copySum + parseFloat(this.porto));
         this.sumTax = round(this.sum * 0.19);
         this.sumFinal = round(this.sum + this.sumTax);
     }

@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 //checks if form passwort is equal to hash in users.json
 router.post('/', async (req, res) => {
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
-    let user = await mongoUser.findOne({
+    const user = await mongoUser.findOne({
         'name': req.body.username.toLowerCase()
     }, {
         _id: 0,
