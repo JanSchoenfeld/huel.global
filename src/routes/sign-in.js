@@ -39,12 +39,8 @@ router.post('/', async (req, res) => {
                 const token = new Token();
                 res.cookie('jwt', token.create(user));
                 delete user.hash;
-<<<<<<< HEAD
-                res.app.locals.user = user;
-=======
                 res.locals.user = user;
                 console.log('login success as ' + user.name + ', cookie created');
->>>>>>> origin/master
                 res.redirect('/');
             } else {
                 res.clearCookie('jwt');
