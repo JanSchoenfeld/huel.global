@@ -24,9 +24,13 @@ router.post('/', async (req, res) => {
     const user = await mongoUser.findOne({
         'username': req.body.username.toLowerCase()
     }, {
-        _id: 0
+        _id: 0,
+        id: 1,
+        name: 1,
+        portfolio: 1,
+        hash: 1
     });
-    if (user != null) {
+    if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
                 const token = new Token();

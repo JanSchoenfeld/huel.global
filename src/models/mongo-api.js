@@ -20,7 +20,19 @@ class MongoAPI {
 
     async findOne(entityFilter, projections) {
         return this.db.collection(this.collection)
-            .findOne(entityFilter, {projection: projections});
+            .findOne(entityFilter, {
+                projection: projections
+            });
+    }
+
+    async update(entity) {
+        const result = await this.db.collection(this.collection)
+            .updateOne({
+                id: entity.id
+            }, {
+                $set: entity
+            });
+        return !!result.modifiedCount;
     }
 
     async delete(id) {
