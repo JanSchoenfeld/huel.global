@@ -8,6 +8,15 @@ const path = require('path');
 
 const router = express.Router();
 
+router.use('/', (req, res, next) =>{
+    console.log(req.app.locals.user.name);
+    if (req.app.locals.user.name != 'huel' | 'gabi'){
+        res.redirect('/');
+    }else{
+        next();
+    }
+});
+
 router.get('/', (req, res) => {
     console.log('billing');
     res.render('billing');
