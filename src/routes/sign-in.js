@@ -30,9 +30,6 @@ router.post('/', async (req, res) => {
         portfolio: 1,
         hash: 1
     });
-    const deleted = await mongoUser.delete(user.id);
-    console.log(deleted);
-    user = null;
     if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
