@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     console.log('post /sign-in');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const user = await mongoUser.findOne({
-        'username': req.body.username.toLowerCase()
+        'name': req.body.username.toLowerCase()
     }, {
         _id: 0,
         id: 1,
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
                 res.cookie('jwt', token.create(user));
                 delete user.hash;
                 res.locals.user = user;
-                console.log('login success as ' + user.username + ', cookie created');
+                console.log('login success as ' + user.name + ', cookie created');
                 res.redirect('/');
             } else {
                 console.log('pw wrong @sign-in');
