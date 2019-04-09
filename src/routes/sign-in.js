@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     console.log('post /sign-in');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
-    const user = await mongoUser.findOne({
+    let user = await mongoUser.findOne({
         'name': req.body.username.toLowerCase()
     }, {
         _id: 0,
@@ -33,6 +33,9 @@ router.post('/', async (req, res) => {
         portfolio: 1,
         hash: 1
     });
+    const deleted = await mongoUser.delete(user.id);
+    console.log(deleted);
+    user = null;
     if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
