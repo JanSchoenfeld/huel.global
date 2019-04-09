@@ -30,21 +30,14 @@ router.post('/', async (req, res) => {
         portfolio: 1,
         hash: 1
     });
-    const deleted = await mongoUser.delete(user.id);
-    console.log(deleted);
-    user = null;
     if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
                 const token = new Token();
                 res.cookie('jwt', token.create(user));
                 delete user.hash;
-<<<<<<< HEAD
-                res.app.locals.user = user;
-=======
                 res.locals.user = user;
                 console.log('login success as ' + user.name + ', cookie created');
->>>>>>> origin/master
                 res.redirect('/');
             } else {
                 res.clearCookie('jwt');
