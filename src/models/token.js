@@ -10,7 +10,8 @@ class Token {
     create(user) {
         const claimsSet = {
             id: user.id,
-            name: user.username,
+            name: user.name,
+            portfolio: user.portfolio,
             iat: this.iat,
             exp: this.exp
         };

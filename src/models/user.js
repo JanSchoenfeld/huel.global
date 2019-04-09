@@ -7,6 +7,7 @@ class User {
         this.id = uuidv4();
         this.createdAt = Date.now();
         this.username = username;
+        this.portfolio = [];
         this.hash = hash;
     }
 }
