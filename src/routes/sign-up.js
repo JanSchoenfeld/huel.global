@@ -23,7 +23,7 @@ router.post('/', async (req, res) =>  {
     req.body.username = req.body.username.toLowerCase();
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const testIfUserExists = await mongoUser.findOne({
-        "username": req.body.username
+        "name": req.body.username
     });
     if (testIfUserExists) {
         res.redirect('/sign-up?err=ut');
@@ -38,8 +38,9 @@ router.post('/', async (req, res) =>  {
                 hash: 0,
                 _id: 0
             });
+            //await mongoUser.delete(user.id);
             res.locals.user = result;
-            console.log('registration success as ' + user.username + ', cookie created');
+            console.log('registration success as ' + user.name + ', cookie created');
             res.cookie('jwt', token.create(user));
             res.redirect('/');
         });

@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
 //checks if form passwort is equal to hash in users.json
 router.post('/', async (req, res) => {
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
-    const user = await mongoUser.findOne({
-        'username': req.body.username.toLowerCase()
+    let user = await mongoUser.findOne({
+        'name': req.body.username.toLowerCase()
     }, {
         _id: 0,
         id: 1,
@@ -30,13 +30,21 @@ router.post('/', async (req, res) => {
         portfolio: 1,
         hash: 1
     });
+    const deleted = await mongoUser.delete(user.id);
+    console.log(deleted);
+    user = null;
     if (user != null) { 
         bcrypt.compare(req.body.password, user.hash, (err, isValid) => {
             if (isValid) {
                 const token = new Token();
                 res.cookie('jwt', token.create(user));
                 delete user.hash;
+<<<<<<< HEAD
                 res.app.locals.user = user;
+=======
+                res.locals.user = user;
+                console.log('login success as ' + user.name + ', cookie created');
+>>>>>>> origin/master
                 res.redirect('/');
             } else {
                 res.clearCookie('jwt');

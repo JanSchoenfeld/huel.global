@@ -8,12 +8,11 @@ const path = require('path');
 
 const router = express.Router();
 
-router.use('/', (req, res, next) =>{
-    console.log(req.app.locals.user.name);
-    if (req.app.locals.user.name != 'huel' | 'gabi'){
-        res.redirect('/');
-    }else{
+router.use('/', (req, res, next) => {
+    if (req.app.locals.user.name === 'huel' || req.app.locals.user.name === 'gabi') {
         next();
+    } else {
+        res.redirect('/');
     }
 });
 
@@ -50,15 +49,17 @@ router.post('/', (req, res) => {
 
 router.get('/output', async (req, res) => {
     console.log('/billing/output');
-    const result = await mammoth.convertToHtml({path: path.join(__dirname, '../../billingres/output/outputBill.docx')});
-    if(!result){
+    const result = await mammoth.convertToHtml({
+        path: path.join(__dirname, '../../billingres/output/outputBill.docx')
+    });
+    if (!result) {
         console.error('fehler beim parsen');
     }
     res.locals.bill = result.value;
     res.render('bill-output');
 });
 
-router.get('/download', (req, res) =>{
+router.get('/download', (req, res) => {
     const filePath = path.join(__dirname, '../../billingres/output/outputBill.docx');
     const fileName = 'rechnung.docx';
     res.download(filePath, fileName);
