@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     console.log('post /sign-in');
     const mongoUser = new MongoAPI(req.app.locals.db, 'users');
     const user = await mongoUser.findOne({
-        'username': req.body.username.toLowerCase()
+        'name': req.body.username.toLowerCase()
     }, {
         _id: 0,
         id: 1,
