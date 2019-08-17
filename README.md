@@ -3,6 +3,6 @@
 Personal repository for my website.
 - Backend: javascript with node.js using express
 - Template Engine: express-handlebars
-- Database: MongoDB
+- NoSQL Database: MongoDB
 - Frontend: Bootstrap, particle.js, Font-Awesome
-- Authentication and Security: bcrypt, jwt
+- Authentication and Security: Jason Web Token, bcrypt
